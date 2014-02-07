@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: MyString
+  position: MyString
+  phone_interview: 2014-01-07 11:19:23
+  on_site_interview: 2014-01-07 11:19:23
+  state_id: 
+
+two:
+  company: MyString
+  position: MyString
+  phone_interview: 2014-01-07 11:19:23
+  on_site_interview: 2014-01-07 11:19:23
+  state_id: 

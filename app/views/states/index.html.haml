@@ -1,0 +1,22 @@
+%h2 States
+
+- if @states.empty?
+  %p No states have been entered yet
+- else
+  %table#states-table
+    %tr
+      %th State
+      %th
+      %th
+      %th
+
+    - @states.each do |state|
+      %tr{:id => "state-#{state.id}"}
+        %td= state.state
+        %td= link_to 'Show', state
+        %td= link_to 'Edit', edit_state_path(state)
+        %td= link_to 'Destroy', state, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New State', new_state_path

@@ -1,0 +1,10 @@
+google_oauth2:
+  client_id:      955415375565.apps.googleusercontent.com
+  client_secret:  tyIK2cnYm8psq7q0NfDJ0cPL
+  token_url:      https://accounts.google.com/o/oauth2/token
+
+google_calendar:
+  url_prefix:     https://www.googleapis.com/calendar/v3
+
+google_contacts:
+  url_prefix:     https://www.google.com/m8/feeds/contacts

@@ -1,0 +1,38 @@
+%h2 Opportunities
+
+- if @opportunities.empty?
+  %p No opportunities have been entered yet
+- else
+  %table
+    %thead
+      %tr
+        %th Company
+        %th Recruiter
+        %th Position
+        %th Appointments
+        %th State
+        %th
+        %th
+        %th
+    %tbody
+    - @opportunities.each do |opportunity|
+      - klass = /rejected/i.match(opportunity.state.state) ? 'rejected' : 'active'
+      - klass += ' event-scheduled' if klass == 'active' && opportunity.events.count > 0 
+      %tr{:class => klass }
+        %td= opportunity.company
+        %td= opportunity.recruiter.company
+        %td= opportunity.position
+        %td
+          -opportunity.events.each do |event|
+            #{event.event_type}: #{event.event_time.to_formatted_s(:short)}
+            %br
+        %td= opportunity.state.state
+        %td= link_to 'Add Event', new_event_path(:type => 'opportunity', :type_id => opportunity.id)
+        %td= link_to 'Add Contact', new_contact_path(:type => 'opportunity', :type_id => opportunity.id)
+        %td= link_to 'Show', opportunity
+        %td= link_to 'Edit', edit_opportunity_path(opportunity)
+        %td= link_to 'Destroy', opportunity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Opportunity', new_opportunity_path

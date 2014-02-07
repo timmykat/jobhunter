@@ -1,0 +1,38 @@
+%h2 Appointments
+
+%table
+  %tr
+    %th Sync with Google
+    %th Type
+    %th Time
+    %th Opportunity
+    %th Recruiter
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr{:class => Time.now > event.event_time ? 'past' : 'active' }
+      - if event.google_event_id.blank?
+        %td
+          %a{:href => "#", :id => "event-#{event.id}", :class => 'unsynced'} Sync now
+      - else
+        %td Synced
+      %td= event.event_type
+      %td= Time.now > event.event_time ? 'Complete' : event.event_time.to_formatted_s(:short)
+      %td
+        - if event.opportunity
+          = event.opportunity.company
+      %td
+        - if event.recruiter
+          = event.recruiter.company
+      %td= link_to 'Show', event
+      - if event.opportunity
+        %td= link_to 'Edit', edit_event_path(event, :type_id => event.opportunity.id)
+      - else
+        %td
+      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path

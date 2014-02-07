@@ -1,0 +1,14 @@
+.container
+  .sixteen.columns
+    %p#notice= notice
+
+    %p
+      %b Company:
+      = @recruiter.company
+  
+      %b New Opportunity:
+      = link_to 'Create', opportunities_path(@recruiter)
+
+    = link_to 'Edit', edit_recruiter_path(@recruiter)
+    \|
+    = link_to 'Back', recruiters_path

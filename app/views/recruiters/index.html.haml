@@ -1,0 +1,31 @@
+%h2 Recruiters
+
+- if @recruiters.empty?
+  %p No recruiters have been entered yet
+- else 
+  %table
+    %tr
+      %th Company
+      %th
+      %th
+      %th
+
+    - @recruiters.each do |recruiter|
+      %tr
+        %td
+          %em= recruiter.company
+        %td= link_to 'Add Opportunity', new_opportunity_path(:recruiter => recruiter.id)
+        %td= link_to 'Add Contact', new_contact_path(:type => 'recruiter', :type_id => recruiter.id)
+        %td= link_to 'Edit', edit_recruiter_path(recruiter)
+        %td= link_to 'Destroy', recruiter, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - if !recruiter.contacts.nil?
+        - recruiter.contacts.each do |contact|
+          %tr
+            %td
+            %td= contact.name
+            %td= contact.email
+            %td= contact.phone
+
+%br
+
+= link_to 'New Recruiter', new_recruiter_path

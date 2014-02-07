@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Type:
+  = @event.event_type
+%p
+  %b Time:
+  = @event.event_time
+%p
+  %b Opportunity:
+  = @event.opportunity.company
+%p
+  %b Recruiter:
+  = @event.recruiter
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

@@ -1,0 +1,34 @@
+%h2 Contacts
+
+- if @contacts.empty?
+  %p No contacts have been entered yet
+- else 
+  %table
+    %tr
+      %th Name
+      %th Title
+      %th Email
+      %th Phone
+      %th Last contact
+      %th Opportunity
+      %th Recruiter
+      %th
+      %th
+      %th
+
+    - @contacts.each do |contact|
+      %tr
+        %td= contact.name
+        %td= contact.title
+        %td= contact.email
+        %td= contact.phone
+        %td= contact.last_contact
+        %td= contact.opportunity.company unless contact.opportunity.blank?
+        %td= contact.recruiter.company unless contact.recruiter.blank?
+        %td= link_to 'Show', contact
+        %td= link_to 'Edit', edit_contact_path(contact)
+        %td= link_to 'Destroy', contact, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Contact', new_contact_path

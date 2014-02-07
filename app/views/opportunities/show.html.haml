@@ -1,0 +1,26 @@
+.container
+  .sixteen.columns
+    %p#notice= notice
+
+    %p
+      %b Company:
+      = @opportunity.company
+    %p
+      %b Position:
+      = @opportunity.position
+    %p
+      %b Phone interview:
+      = @opportunity.phone_interview
+    %p
+      %b On site interview:
+      = @opportunity.on_site_interview
+    %p
+      %b State:
+      = @opportunity.state.state
+    %p
+      %b Recruiter:
+      = @opportunity.recruiter.company
+
+    = link_to 'Edit', edit_opportunity_path(@opportunity)
+    \|
+    = link_to 'Back', opportunities_path

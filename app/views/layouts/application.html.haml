@@ -1,0 +1,52 @@
+!!!
+- page_path = request.path.gsub(/\//, '')
+/[if lt IE 7 ]
+  %html(class="ie ie6" lang="en")
+/[if IE 7 ]
+  %html(class="ie ie7" lang="en")
+/[if IE 8 ]
+  %html(class="ie ie8" lang="en")
+= surround '<!-- [if (gte IE 9)|!(IE)] -->'.html_safe, '<!-- <![endif]-->'.html_safe do
+  %html(lang="en")
+
+    %head
+      %title Jobhunter Tracker
+      = javascript_include_tag "application"
+      = stylesheet_link_tag "application", media: "all"  
+
+      /[if lt IE 9]
+        %script(src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+
+      = csrf_meta_tag
+    %body
+      .container
+        .sixteen.columns 
+          %h1 JobHunt Tracker  
+          %ul.nav 
+            %li
+              %a{:href => '/opportunities'} Home - Opportunities
+            %li
+              %a{:href => '/events'} Appointments
+            %li
+              %a{:href => '/recruiters'} Recruiters
+            %li
+              %a{:href => '/contacts'} Contacts
+            %li
+              %a{:href => '/states'} States
+            %li.calendar-connection
+              - auth = GoogleClient.first
+              - if !auth.blank?
+                .connected 
+                  %a{:href => '/auth/disconnect', :title => 'Disconnect from Google Calendar' } Connected as #{auth.identity}
+              - else
+                %a{:href => '/auth/google_oauth2', :class => 'button'}
+                  Connect to Google Calendar
+      .container
+        .sixteen.columns
+          #notices
+            - flash.each do |name, msg|
+              - if msg.is_a? String
+                = content_tag(:div, msg, :class => "flash #{name}")
+      .container
+        .sixteen.columns        
+          = yield

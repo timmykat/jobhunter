@@ -1,0 +1,30 @@
+.container
+  .sixteen.columns
+    %p#notice= notice
+
+    %p
+      %b Name:
+      = @contact.name
+    %p
+      %b Title:
+      = @contact.title
+    %p
+      %b Email:
+      = @contact.email
+    %p
+      %b Phone:
+      = @contact.phone
+    %p
+      %b Last contact:
+      = @contact.last_contact
+    %p
+      - if !@contact.opportunity.blank?
+        %b Opportunity:
+        = @contact.opportunity.company
+      - elsif !@contact.recruiter.blank?
+        %b Recruiter:
+        = @contact.recruiter.company
+
+    = link_to 'Edit', edit_contact_path(@contact)
+    \|
+    = link_to 'Back', contacts_path

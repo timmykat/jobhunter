@@ -1,0 +1,22 @@
+= form_for @opportunity do |f|
+  - if @opportunity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@opportunity.errors.count, "error")} prohibited this opportunity from being saved:"
+      %ul
+        - @opportunity.errors.full_messages.each do |msg|
+          %li= msg
+  
+  .field
+    = f.label :recruiter
+    = f.select :recruiter, options_for_select(select_options(:recruiter), :selected => @opportunity.recruiter.id)  
+  .field
+    = f.label :company
+    = f.text_field :company
+  .field
+    = f.label :position
+    = f.text_field :position
+  .field
+    = f.label :state
+    = f.select :state, options_for_select(select_options(:state), :selected => @opportunity.state.blank? ? 1 : @opportunity.state.id)
+  .actions
+    = f.submit 'Save'
